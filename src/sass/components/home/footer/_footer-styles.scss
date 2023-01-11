@@ -1,0 +1,21 @@
+footer {
+  background-color: $main-gray;
+  padding: 30px 0;
+}
+
+.footer-list--text {
+
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: $main-space-black;
+}
+.copyrite{
+    padding-right: 8px;
+}
+.footer-list__svg{
+    padding: 0 10px;
+}

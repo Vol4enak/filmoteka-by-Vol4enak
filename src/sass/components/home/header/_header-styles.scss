@@ -1,0 +1,64 @@
+.bgc-image {
+  padding-bottom: 92px;
+  padding-top: 40px;
+  background-image: url('../images/home-png/abstract-red-mob@1x.png');
+  background-color: rgba(0, 0, 0, 0.56);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-list {
+  display: flex;
+  justify-content: flex-end;
+  gap: 39px;
+}
+
+.header-list__link {
+  color: $main-white;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+.header-link {
+  height: 24px;
+}
+.header-form {
+  position: relative;
+  margin-top: 50px;
+}
+
+.header-form__input {
+  &::placeholder {
+    color: $main-white;
+  }
+  color: $main-white;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 0.5px solid #ffffff;
+}
+.header-form__btn {
+  position: absolute;
+  top: 0;
+  left: 95%;
+  background-color: transparent;
+  border: 0;
+}
+
+.current-page {
+  &::after {
+    content: '';
+    display: block;
+
+    height: 2px;
+    width: 35px;
+    background-color: $main-red;
+  }
+}

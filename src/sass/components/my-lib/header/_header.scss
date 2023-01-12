@@ -1,0 +1,48 @@
+.bgc-lib-image {
+  max-width: 480px;
+  max-height: 230px;
+  padding-bottom: 62px;
+  padding-top: 40px;
+
+  background-image: url('../images/home-png/abstract-red-mob@1x.png');
+  background-image: url('../images/lib-png/lib-mob@2x.png');
+  background-color: rgba(0, 0, 0, 0.56);
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-list {
+  display: flex;
+  justify-content: flex-end;
+  gap: 39px;
+}
+
+.header-list__link {
+  color: $main-white;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+.header-link {
+  height: 24px;
+}
+.current-page {
+  &::after {
+    content: '';
+    display: block;
+
+    height: 2px;
+    width: 100%;
+    background-color: $main-red;
+  }
+}

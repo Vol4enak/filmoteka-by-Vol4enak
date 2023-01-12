@@ -1,7 +1,11 @@
-.bgc-image {
+.bgc-home-image {
+  max-width: 480px;
+  max-height: 230px;
   padding-bottom: 92px;
   padding-top: 40px;
+
   background-image: url('../images/home-png/abstract-red-mob@1x.png');
+
   background-color: rgba(0, 0, 0, 0.56);
   background-size: cover;
   background-repeat: no-repeat;

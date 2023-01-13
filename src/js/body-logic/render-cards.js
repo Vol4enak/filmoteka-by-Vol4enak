@@ -3,23 +3,27 @@ import {
   getFetchedByGenders,
   getFetchedById,
 } from '../header-logic/feach-API';
-
+const API_KEY = 'bcde96d2248e63a51f520e697b2ad108';
 
 const bodyEl = document.querySelector('.main-container');
 export default async function renderCards() {
   const getsTrands = await getFetchedByTrends();
-  const getsGenders = await getFetchedByGenders();
-  const getsId = await getFetchedById();
-  console.log(getsId);
-  console.log(getsGenders);
-console.log(getsTrands);
+  // const getsId = await getId();
+
+  // console.log(getsId);
+  // const getsGenders = await getFetchedByGenders();
+  // console.log(getsGenders);
+  console.log(getsTrands);
   // console.log(bodyEl.insertAdjacentHTML('beforeend', zxc.poster_path));
-  return getsTrands.results.map(({ backdrop_path, original_title }) => {
-    const render = `<div>
-            <img src="${backdrop_path}" alt="123" width="336" height="455">
+  return getsTrands.results.map(({ poster_path, original_title, id }) => {
+    getId(id)
+
+    const render = `<article>
+            <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="123" width="336" height="455">
             <p>${original_title}</p>
-            <p>Drama, Action | 2020</p>
-        </div>`;
+            <p> | 2020</p>
+        </article>`;
+
     return bodyEl.insertAdjacentHTML('beforeend', render);
   });
 }
@@ -29,3 +33,9 @@ console.log(getsTrands);
 // /1NqwE6LP9IEdOZ57NCT51ftHtWT.jpg
 // /8lvHyhjr8oUKOOy2dKXoALWKdp0.png
 // /kP7t6RwGz2AvvTkvnI1uteEwHet.png
+
+async function getId(id) {
+  const getsId = await getFetchedById(id);
+  console.log(getsId);
+  return getsId;
+}

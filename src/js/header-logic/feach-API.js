@@ -9,22 +9,19 @@ export async function getFetchedByTrends() {
   return card;
 }
 
-export async function getFetchedByGenders(){
-  const getFetch = await fetch(
-`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
-  )
-  const card = await getFetch.json();
-  return card;
+// export async function getFetchedByGenders(){
+//   const getFetch = await fetch(
+// `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+//   )
+//   const card = await getFetch.json();
+//   return card;
   
-}
+// }
 
-export async function getFetchedById() {
+export async function getFetchedById(id) {
    const getFetch = await fetch(
-     `https://api.themoviedb.org/3/search/movie?api_key=bcde96d2248e63a51f520e697b2ad108&language=en-US&query=war&page=1&include_adult=true`
+     `https://api.themoviedb.org/3/movie/${id}?api_key=bcde96d2248e63a51f520e697b2ad108&language=en-US`
    );
    const card = await getFetch.json();
-   return card;
+   return card.genres;
 }
-// async function getFatched() {
-
-// }

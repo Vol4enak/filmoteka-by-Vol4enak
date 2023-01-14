@@ -1,11 +1,19 @@
+import {getFetchBySearch} from "./feach-API"
+import {renderLogic} from "../body-logic/render-cards"
+
+
 const form = document.querySelector('.header-form');
 
-export default function input() {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (e.target.searchQuery.value.trim() === '') return console.log('error');
-    return e.target.searchQuery.value.trim();
-  });
+export async function input() {
+  form.addEventListener('submit', onSearch);
 }
 
-function onSearch(e) {}
+ async function onSearch(e) {
+   e.preventDefault();
+   const searchQuery = e.target.searchQuery.value.trim()
+console.log(searchQuery);
+  if (searchQuery === '') return console.log('error');
+   const zxc = await getFetchBySearch(searchQuery);
+  console.log(zxc);
+   return renderLogic(zxc);
+}

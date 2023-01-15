@@ -5,44 +5,132 @@ import {
 } from '../header-logic/feach-API';
 
 const bodyEl = document.querySelector('.main-container');
-
+const modalBox = document.querySelector('.clearing-modal');
 export async function renderCardsByTrend() {
   const getsTrands = await getFetchedByTrends();
-renderLogic(getsTrands)  
+  renderBodyCards(getsTrands);
 }
 
 export async function renderCardsBySearch() {
-  const getSearch = await getFetchBySearch()
-  renderLogic(getSearch)
+  const getSearch = await getFetchBySearch();
+  renderBodyCards(getSearch);
 }
 
 
-export function renderLogic(name) {
 
-  name.results.map(
-    ({ poster_path, original_title, id, release_date }) => {
-      getFetchedById(id).then(res => {
-        console.log(res);
-        let genres = res.map(res => res.name + []);
+export function renderBodyCards(name) {
+  bodyEl.innerHTML = '';
+  name.results.map(({ poster_path, original_title, id, release_date }) => {
+    let imgPreview = 'https://image.tmdb.org/t/p/w500';
+    if (!poster_path) {
+      poster_path = '/wp-content/uploads/2022/05/coming-soon.jpg';
+      imgPreview = 'https://en9lish.com';
+    }
+    if (!release_date) {
+      release_date = "N/A"
+    }
+    getFetchedById(id).then(res => {
+      let genres = res.genres.map(res => res.name);
+      if (genres.length === 0) {
+        genres.push("N/A")
+      }
 
-        if (genres.length > 3) {
-          genres = genres.slice(0, 2) + ', other';
-        }
-        genres = genres.toString().replaceAll(',', ', ');
+      if (genres.length > 3) {
+        genres = genres.slice(0, 2) + ', other';
+      }
+      genres = genres.toString().replaceAll(',', ', ');
 
-        const render = `<article>
-            <img class="movie-preview"src="https://image.tmdb.org/t/p/w500${poster_path}" alt="123" width="336" height="455">
+      const render = `<article class="box" ">
+            <img class="movie-preview"src="${imgPreview}${poster_path}" alt="123" width="336" height="455" data-action="${id}" >
             <ul class="info-list">
               <li>
               <p class="info-list__title">${original_title}</p>
               </li>
               <li>
-            <p class="info-list__genres">${genres} | ${release_date.slice(0, 4)}</p></li>
+            <p class="info-list__genres">${genres} | ${release_date.slice(
+        0,
+        4
+      )}</p></li>
           </ul>
                       </article>`;
 
-        return bodyEl.insertAdjacentHTML('beforeend', render);
-      });
+      return bodyEl.insertAdjacentHTML('beforeend', render);
+    });
+  });
+}
+
+export function renderModalInformation(name) {
+  let {
+    poster_path,
+    original_title,
+    id,
+    release_date,
+    vote_average,
+    vote_count,
+    popularity,
+    overview,
+  } = name; 
+    let imgPreview = 'https://image.tmdb.org/t/p/w500';
+    if (!poster_path) {
+      poster_path = '/wp-content/uploads/2022/05/coming-soon.jpg';
+      imgPreview = 'https://en9lish.com';
     }
-  );
+    if (!release_date) {
+      release_date = 'N/A';
+    }
+  getFetchedById(id).then(res => {
+      let genres = res.genres.map(res => res.name);
+      if (genres.length === 0) {
+        genres.push('N/A');
+      }
+      genres = genres.slice(0, 1);
+
+      const render = ` 
+      <img src="${imgPreview}${poster_path}" alt="123" width="240" height="357">
+                <h2 class="mobal__title">${original_title}</h2>
+                <div class="helper-in-modal">
+                    <ul class="mobal__list--description">
+                        <li class="mobal-list__item">
+                            <p class="mobal-item__text">Vote / Votes</p>
+                        </li>
+                        <li class="mobal-list__item">
+                            <p class="mobal-item__text"> <span class="module__text-popularity">Popularity</span> </p>
+                        </li>
+                        <li class="mobal-list__item">
+                            <p class="mobal-item__text">Original Title</p>
+                        </li>
+                        <li class="mobal-list__item">
+                            <p class="mobal-item__text">Genre</p>
+                        </li>
+                    </ul>
+                    <ul class="mobal__list--info">
+                        <li class="mobal-list__item">
+                            <p class="mobal-item__text"><span class="module__text-vote">${vote_average}</span> /
+                                <span class="module__text-votes">${vote_count}</span>
+                            </p>
+                        </li>
+                        <li class="mobal-list__item">
+                            <p class="mobal-item__text">${popularity}</p>
+                        </li>
+                        <li class="mobal-list__item">
+                            <p class="mobal-item__text">${original_title}</p>
+                        </li>
+                        <li class="mobal-list__item">
+                            <p class="mobal-item__text">${genres}</p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="mobal__title--about">About</p>
+                <p class="mobal__title--about-text">${overview}</p>
+                <ul class="modal-btn__list">
+                    <li class="modal-btn__item">
+                        <button type="button" class="modal-btn__watched" data-action="watched" >add to Watched </button>
+                    </li>
+                    <li class="modal-btn__item">
+                        <button type="button" class="modal-btn__queue" data-action="queue" > add to queue</button>
+                    </li>
+                </ul>`;
+
+      return modalBox.insertAdjacentHTML('beforeend', render);
+    });
 }

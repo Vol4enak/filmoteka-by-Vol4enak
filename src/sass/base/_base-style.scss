@@ -3,7 +3,7 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-ul {
+ul,li {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -43,6 +43,8 @@ img {
 button {
   font-family: inherit;
   display: block;
+  padding: 0;
+  margin: 0;
 }
 
 address {
@@ -51,4 +53,7 @@ address {
 
 .container {
   @extend %container;
+}
+.visibility{
+  @extend %visibility;
 }

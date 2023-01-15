@@ -8,11 +8,12 @@ export async function getFetchedByTrends() {
     `${FETCH_HTTP}/trending/movie/day?api_key=${API_KEY}`
   );
   const card = await getFetch.json();
+
   return card;
 }
 
 export async function getFetchBySearch(query) {
-  console.log(query);
+
   const getFetchFromSearch = await fetch(`
 ${FETCH_HTTP}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`);
   const cardInfo = await getFetchFromSearch.json();
@@ -25,6 +26,6 @@ export async function getFetchedById(id) {
      `${FETCH_HTTP}/movie/${id}?api_key=${API_KEY}&language=en-US`
    );
   const card = await getFetch.json();
-  
-   return card.genres;
+
+   return card;
 }

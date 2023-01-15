@@ -1,4 +1,6 @@
-import {input} from "./js/header-logic/input"
+import "./js/body-logic/modal-win/modal"
+import "./js/body-logic/modal-win/modal-btn"
+import { input } from "./js/header-logic/input"
 import getFetchedByTrends from './js/header-logic/feach-API';
 import {
   renderCardsByTrend,

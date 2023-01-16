@@ -6,6 +6,8 @@ import {
 
 const bodyEl = document.querySelector('.main-container');
 const modalBox = document.querySelector('.clearing-modal');
+
+
 export async function renderCardsByTrend() {
   const getsTrands = await getFetchedByTrends();
   renderBodyCards(getsTrands);
@@ -18,7 +20,7 @@ export async function renderCardsBySearch() {
 
 export function renderBodyCards(name) {
   bodyEl.innerHTML = '';
-  name.results.map(({ poster_path, original_title, id, release_date }) => {
+  name.map(({ poster_path, original_title, id, release_date }) => {
     let imgPreview = 'https://image.tmdb.org/t/p/w500';
     if (!poster_path) {
       poster_path = '/wp-content/uploads/2022/05/coming-soon.jpg';
@@ -40,12 +42,12 @@ export function renderBodyCards(name) {
 
       const render = `<article class="box" ">
             <img class="movie-preview"src="${imgPreview}${poster_path}" alt="123" width="336" height="455" data-action="${id}" >
-            <ul class="info-list">
+            <ul class="info-list" data-action="${id}">
               <li>
-              <p class="info-list__title">${original_title}</p>
+              <p class="info-list__title" data-action="${id}">${original_title}</p>
               </li>
               <li>
-            <p class="info-list__genres">${genres} | ${release_date.slice(
+            <p class="info-list__genres" data-action="${id}">${genres} | ${release_date.slice(
         0,
         4
       )}</p></li>
@@ -76,6 +78,8 @@ export function renderModalInformation(name) {
   if (!release_date) {
     release_date = 'N/A';
   }
+ 
+
   getFetchedById(id).then(res => {
     let genres = res.genres.map(res => res.name);
     if (genres.length === 0) {

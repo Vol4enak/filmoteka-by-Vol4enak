@@ -21,7 +21,6 @@ export function btnWatched(modalWatched, queryText) {
     if (arrIdCardForWatched.length === 1) {
       arrIdCardForWatched = [];
       modalWatched.textContent = 'add to Watched';
-      console.log(arrIdCardForWatched);
       return;
     }
    for (let i = 0; i < resFromWatch.length; i++) {

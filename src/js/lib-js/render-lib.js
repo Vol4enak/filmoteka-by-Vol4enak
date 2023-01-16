@@ -11,49 +11,61 @@ const body = document.querySelector('body');
 const modalBtn = document.querySelector('.btn-close');
 const modal = document.querySelector('.modal');
 
-bodyEl.addEventListener('click', openModal);
-
 btnLibWatched.addEventListener('click', LibCardrenderWatch);
 btnLibQueue.addEventListener('click', LibCardrenderQueue);
+bodyEl.addEventListener('click', openModal);
 
 export function openModal(e) {
- 
   const query = e.target.nodeName;
   if (query === 'IMG' || query === 'P' || query === 'UL') {
     modal.addEventListener('click', onBtnClick);
     modalBtn.addEventListener('click', onClose);
   }
 }
-
+LibCardrenderWatch();
+let a = 0;
+let b = 0;
 function onBtnClick(e) {
   const query = e.target.nodeName;
   const queryClass = e.target.className;
   const dataId = e.target.dataset.action;
-  if (queryClass === 'overlay') {
-    onClose();
-  }
-  // считать кол-во  console.log(dataId);(чётное не чётное)
+  
+
   if (query === 'BUTTON' && dataId === 'watched') {
-    console.log(dataId);
-    LibCardrenderWatch();
+    a += 1;
   }
   if (query === 'BUTTON' && dataId === 'queue') {
-    console.log(dataId);
-    LibCardrenderQueue();
+    b += 1;
+  }
+  console.log(a);
+  console.log(b);
+  if (queryClass === 'overlay') {
+    onClose();
+    if (a % 2 === 1) {
+      LibCardrenderWatch();
+    }
+    if (b % 2 === 1) {
+      LibCardrenderQueue();
+    }
+    a = 0;
+    b = 0;
+    //  console.log(a);
+    //  console.log(b);
   }
 }
 
 function onClose() {
-   clearModal.innerHTML = '';
-   modal.classList.add('visibility');
-   body.style.overflow = 'visible';
-   modal.removeEventListener('click', onBtnClick);
+  clearModal.innerHTML = '';
+  modal.classList.add('visibility');
+  body.style.overflow = 'visible';
+  modal.removeEventListener('click', onBtnClick);
 }
 
-function LibCardrenderWatch() {
-    stylesForWatched();
+async function LibCardrenderWatch() {
+  stylesForWatched();
   bodyEl.innerHTML = '';
   arrIdCardForWatched.map(id => {
+    
     getFetchedById(id).then(res => {
       let { poster_path, original_title, id, release_date } = res;
       let imgPreview = 'https://image.tmdb.org/t/p/w500';
@@ -76,12 +88,12 @@ function LibCardrenderWatch() {
       genres = genres.toString().replaceAll(',', ', ');
       const render = `<article class="box" ">
             <img class="movie-preview"src="${imgPreview}${poster_path}" alt="123" width="336" height="455" data-action="${id}" >
-            <ul class="info-list">
+            <ul class="info-list"data-action="${id}">
               <li>
-              <p class="info-list__title">${original_title}</p>
+              <p class="info-list__title"data-action="${id}">${original_title}</p>
               </li>
               <li>
-            <p class="info-list__genres">${genres} | ${release_date.slice(
+            <p class="info-list__genres"data-action="${id}">${genres} | ${release_date.slice(
         0,
         4
       )}</p></li>
@@ -93,8 +105,8 @@ function LibCardrenderWatch() {
   });
 }
 
-function LibCardrenderQueue() {
-stylesForQueue();
+async function LibCardrenderQueue() {
+  stylesForQueue();
   bodyEl.innerHTML = '';
   arrIdCardForQueue.map(id => {
     getFetchedById(id).then(res => {
@@ -119,12 +131,12 @@ stylesForQueue();
       genres = genres.toString().replaceAll(',', ', ');
       const render = `<article class="box" ">
             <img class="movie-preview"src="${imgPreview}${poster_path}" alt="123" width="336" height="455" data-action="${id}" >
-            <ul class="info-list">
+            <ul class="info-list"data-action="${id}">
               <li>
-              <p class="info-list__title">${original_title}</p>
+              <p class="info-list__title"data-action="${id}">${original_title}</p>
               </li>
               <li>
-            <p class="info-list__genres">${genres} | ${release_date.slice(
+            <p class="info-list__genres"data-action="${id}">${genres} | ${release_date.slice(
         0,
         4
       )}</p></li>

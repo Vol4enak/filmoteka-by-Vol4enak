@@ -1,13 +1,79 @@
-// const btnWatched = document.querySelector('.modal-btn__watched');
-// const btnQueue = document.querySelector('.modal-btn__queue');
+// import { showWatchedFilms ,showWQueueFilms} from '../../lib-js/render-lib';
 
-// btnWatched.addEventListener('click', onWatched);
-// btnQueue.addEventListener('click', onQueue);
 
-// export function onWatched(e) {
-// console.log(e);
-// }
+const resFromWatch = getIlocaltemWatchedme();
+const resFromQueue = getlocalItemQueue();
+// console.log('local watch', resFromWatch);
+// console.log('local queue', resFromQueue);
+export let arrIdCardForWatched = [];
+export let arrIdCardForQueue = [];
+if (resFromWatch) {
+  arrIdCardForWatched = resFromWatch;
+}
+if (resFromQueue) {
+  arrIdCardForQueue = resFromQueue;
+}
 
-// function onQueue(e) {
-    
-// }
+export function btnWatched(modalWatched, queryText) {
+  let idCard = localStorage.getItem('data');
+  if (queryText === 'remove from Watched') {
+
+    if (arrIdCardForWatched.length === 1) {
+      arrIdCardForWatched = [];
+      modalWatched.textContent = 'add to Watched';
+      console.log(arrIdCardForWatched);
+      return;
+    }
+   for (let i = 0; i < resFromWatch.length; i++) {
+     if (resFromWatch[i] === idCard) {
+       resFromWatch.splice(i, 1);
+       modalWatched.textContent = 'Add to Watched';
+     }
+   }
+   return;
+  }
+  modalWatched.textContent = 'remove from Watched';
+  modalWatched.style.padding = '6px';
+  arrIdCardForWatched.push(idCard);
+  
+}
+
+export function btnQueue(modalQueue, queryText) {
+  let idCard = localStorage.getItem('data');
+
+  if (queryText === 'remove from queue') {
+    if (arrIdCardForQueue.length === 1) {
+      arrIdCardForQueue = [];
+      modalQueue.textContent = 'add to queue';
+      modalQueue.style.paddingRight = '16px';
+      modalQueue.style.paddingLeft = '16px';
+      return;
+      }
+    for (let i = 0; i < resFromQueue.length; i++) {
+      if (resFromQueue[i] === idCard) {
+        resFromQueue.splice(i,1);
+        modalQueue.textContent = 'Add to queue';
+      }
+      }
+ 
+      return
+  }
+  modalQueue.textContent = 'remove from queue';
+  modalQueue.style.padding = '6px';
+  arrIdCardForQueue.push(idCard);
+  console.log(arrIdCardForQueue);
+}
+
+function getIlocaltemWatchedme() {
+  const getItemWatched = localStorage.getItem('data-watched');
+  return (parseItemWatched = JSON.parse(getItemWatched));
+}
+function getlocalItemQueue() {
+  const getItemQueue = localStorage.getItem('data-queue');
+  return (parseItemQueue = JSON.parse(getItemQueue));
+}
+// localStorage.clear();
+
+// const xzc = ['1', '2', '4', '3'];
+// xzc.pop('2');
+// console.log(xzc);

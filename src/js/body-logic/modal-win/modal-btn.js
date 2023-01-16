@@ -61,7 +61,7 @@ export function btnQueue(modalQueue, queryText) {
   modalQueue.textContent = 'remove from queue';
   modalQueue.style.padding = '6px';
   arrIdCardForQueue.push(idCard);
-  console.log(arrIdCardForQueue);
+
 }
 
 function getIlocaltemWatchedme() {

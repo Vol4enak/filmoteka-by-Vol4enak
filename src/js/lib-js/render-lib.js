@@ -32,12 +32,13 @@ function onBtnClick(e) {
   if (queryClass === 'overlay') {
     onClose();
   }
+  // считать кол-во  console.log(dataId);(чётное не чётное)
   if (query === 'BUTTON' && dataId === 'watched') {
-    onClose();
+    console.log(dataId);
     LibCardrenderWatch();
   }
   if (query === 'BUTTON' && dataId === 'queue') {
-    onClose();
+    console.log(dataId);
     LibCardrenderQueue();
   }
 }

@@ -29,7 +29,6 @@ function onBtnClick(e) {
   const query = e.target.nodeName;
   const queryClass = e.target.className;
   const dataId = e.target.dataset.action;
-  
 
   if (query === 'BUTTON' && dataId === 'watched') {
     a += 1;
@@ -49,8 +48,6 @@ function onBtnClick(e) {
     }
     a = 0;
     b = 0;
-    //  console.log(a);
-    //  console.log(b);
   }
 }
 
@@ -65,7 +62,6 @@ async function LibCardrenderWatch() {
   stylesForWatched();
   bodyEl.innerHTML = '';
   arrIdCardForWatched.map(id => {
-    
     getFetchedById(id).then(res => {
       let { poster_path, original_title, id, release_date } = res;
       let imgPreview = 'https://image.tmdb.org/t/p/w500';

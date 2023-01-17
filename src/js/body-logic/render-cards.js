@@ -10,6 +10,7 @@ const modalBox = document.querySelector('.clearing-modal');
 
 export async function renderCardsByTrend() {
   const getsTrands = await getFetchedByTrends();
+
   renderBodyCards(getsTrands);
 }
 
@@ -29,7 +30,9 @@ export function renderBodyCards(name) {
     if (!release_date) {
       release_date = 'N/A';
     }
+
     getFetchedById(id).then(res => {
+      console.log(res);
       let genres = res.genres.map(res => res.name);
       if (genres.length === 0) {
         genres.push('N/A');

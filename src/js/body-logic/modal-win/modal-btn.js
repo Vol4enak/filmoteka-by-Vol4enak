@@ -3,8 +3,7 @@
 
 const resFromWatch = getIlocaltemWatchedme();
 const resFromQueue = getlocalItemQueue();
-// console.log('local watch', resFromWatch);
-// console.log('local queue', resFromQueue);
+
 export let arrIdCardForWatched = [];
 export let arrIdCardForQueue = [];
 if (resFromWatch) {

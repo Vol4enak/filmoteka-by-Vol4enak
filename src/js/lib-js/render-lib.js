@@ -22,6 +22,7 @@ export function openModal(e) {
     modalBtn.addEventListener('click', onClose);
   }
 }
+console.log(1);
 LibCardrenderWatch();
 let a = 0;
 let b = 0;

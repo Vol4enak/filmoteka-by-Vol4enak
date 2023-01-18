@@ -70,8 +70,3 @@ function getlocalItemQueue() {
   const getItemQueue = localStorage.getItem('data-queue');
   return (parseItemQueue = JSON.parse(getItemQueue));
 }
-// localStorage.clear();
-
-// const xzc = ['1', '2', '4', '3'];
-// xzc.pop('2');
-// console.log(xzc);

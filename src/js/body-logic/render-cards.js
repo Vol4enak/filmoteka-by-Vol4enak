@@ -21,7 +21,7 @@ export async function renderCardsBySearch() {
 
 export function renderBodyCards(name) {
   bodyEl.innerHTML = '';
-  name.map(({ poster_path, original_title, id, release_date }) => {
+  name.results.map(({ poster_path, original_title, id, release_date }) => {
     let imgPreview = 'https://image.tmdb.org/t/p/w500';
     if (!poster_path) {
       poster_path = '/wp-content/uploads/2022/05/coming-soon.jpg';
@@ -32,7 +32,6 @@ export function renderBodyCards(name) {
     }
 
     getFetchedById(id).then(res => {
-      console.log(res);
       let genres = res.genres.map(res => res.name);
       if (genres.length === 0) {
         genres.push('N/A');

@@ -13,7 +13,7 @@ export async function input() {
    e.preventDefault();
    const searchQuery = e.target.searchQuery.value.trim()
 
-  if (searchQuery === '') return console.log('error');
+  if (searchQuery === '') return ;
    const zxc = await getFetchBySearch(searchQuery);
 
    return renderBodyCards(zxc);

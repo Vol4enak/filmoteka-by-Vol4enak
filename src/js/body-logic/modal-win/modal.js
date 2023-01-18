@@ -13,32 +13,32 @@ const modal = document.querySelector('.modal');
 const clearModal = document.querySelector('.clearing-modal');
 const modalBtn = document.querySelector('.btn-close');
 const body = document.querySelector('body');
+const modalWin = document.querySelector('.modal-window');
 
 container.addEventListener('click', openModal);
 
 export function openModal(e) {
-    const query = e.target.nodeName;
-    const dataId = e.target.dataset.action;
-    setIdFromLocalStorage(dataId);
-    if (query === 'IMG' || query === 'P' || query === 'UL') {
-      getFetchedById(dataId).then(res => {
-        renderModalInformation(res);
-      });
-      modal.addEventListener('click', onBtnClick);
-      modal.classList.remove('visibility');
-      body.style.overflow = 'hidden';
-      modalBtn.addEventListener('click', onClose);
-    }
+  const query = e.target.nodeName;
+  const dataId = e.target.dataset.action;
+  setIdFromLocalStorage(dataId);
+  modalWin.style.opacity = '1';
+  if (query === 'IMG' || query === 'P' || query === 'UL') {
+    getFetchedById(dataId).then(res => {
+      renderModalInformation(res);
+    });
+    modal.addEventListener('click', onBtnClick);
+    modal.classList.remove('visibility');
+    body.style.overflow = 'hidden';
+    modalBtn.addEventListener('click', onClose);
+  }
 }
 
-
-
-
 export function onClose() {
-
+  
   clearModal.innerHTML = '';
   modal.classList.add('visibility');
   body.style.overflow = 'visible';
+  modalWin.style.opacity = '0';
   modal.removeEventListener('click', onBtnClick);
   localStorage.setItem('data-watched', JSON.stringify(arrIdCardForWatched));
   localStorage.setItem('data-queue', JSON.stringify(arrIdCardForQueue));

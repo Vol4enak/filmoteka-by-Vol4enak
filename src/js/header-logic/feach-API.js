@@ -9,7 +9,7 @@ export async function getFetchedByTrends() {
   );
   const card = await getFetch.json();
 
-  return card.results;
+  return card;
 }
 
 export async function getFetchBySearch(query) {

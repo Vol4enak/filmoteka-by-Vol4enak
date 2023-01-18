@@ -36,8 +36,7 @@ function onBtnClick(e) {
   if (query === 'BUTTON' && dataId === 'queue') {
     b += 1;
   }
-  console.log(a);
-  console.log(b);
+
   if (queryClass === 'overlay') {
     onClose();
     if (a % 2 === 1) {

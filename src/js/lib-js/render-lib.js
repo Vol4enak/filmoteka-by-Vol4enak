@@ -17,7 +17,7 @@ bodyEl.addEventListener('click', openModal);
 
 export function openModal(e) {
   const query = e.target.nodeName;
-  if (query === 'IMG' || query === 'P' || query === 'UL') {
+  if (query === 'IMG' || query === 'P' || query === 'SPAN') {
     modal.addEventListener('click', onBtnClick);
     modalBtn.addEventListener('click', onClose);
   }

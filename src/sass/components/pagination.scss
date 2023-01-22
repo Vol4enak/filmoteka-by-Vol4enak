@@ -15,6 +15,7 @@
   border-radius: 5px;
 }
 
+
 .pagination button {
   border: none;
   border-radius: 5px;
@@ -22,7 +23,6 @@
   width: 20px;
   height: 20px;
 }
-
 
 .left-arrow {
   background-image: url('../images/arrow-left.svg');
@@ -36,4 +36,12 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 18px 18px;
+}
+.pagination .is-active {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $main-orange;
+  color: white;
 }

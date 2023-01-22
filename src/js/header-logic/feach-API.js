@@ -1,11 +1,11 @@
-import input from './input';
+// import input from './input';
 
 const API_KEY = 'bcde96d2248e63a51f520e697b2ad108';
 const FETCH_HTTP = 'https://api.themoviedb.org/3';
 
 export async function getFetchedByTrends() {
   const getFetch = await fetch(
-    `${FETCH_HTTP}/trending/movie/day?api_key=${API_KEY}`
+    `${FETCH_HTTP}/trending/movie/day?api_key=${API_KEY}&page=3`
   );
   const card = await getFetch.json();
 

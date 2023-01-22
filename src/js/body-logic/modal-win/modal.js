@@ -34,7 +34,6 @@ export function openModal(e) {
 }
 
 export function onClose() {
-  
   clearModal.innerHTML = '';
   modal.classList.add('visibility');
   body.style.overflow = 'visible';

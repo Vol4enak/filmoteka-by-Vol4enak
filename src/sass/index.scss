@@ -1,8 +1,8 @@
 @import './common';
 @import './utils/placeholders';
 @import './base/base-style';
-
 @import './utils/variables';
+@import './components/pagination.scss';
 @import './components/home/header/header-styles';
 @import './components/home/main/body';
 @import './components/modal.scss';

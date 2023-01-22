@@ -1,0 +1,39 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.pagination button:first-child,
+.pagination button:last-child {
+  width: 40px;
+  height: 40px;
+  background-color: $main-gray;
+  border: none;
+  border-radius: 5px;
+}
+
+.pagination button {
+  border: none;
+  border-radius: 5px;
+  background-color: $main-gray;
+  width: 20px;
+  height: 20px;
+}
+
+
+.left-arrow {
+  background-image: url('../images/arrow-left.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+}
+
+.right-arrow {
+  background-image: url('../images/arrow-rigth.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+}

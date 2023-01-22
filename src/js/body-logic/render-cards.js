@@ -7,7 +7,6 @@ import {
 const bodyEl = document.querySelector('.main-container');
 const modalBox = document.querySelector('.clearing-modal');
 
-
 export async function renderCardsByTrend() {
   const getsTrands = await getFetchedByTrends();
 
@@ -80,7 +79,6 @@ export function renderModalInformation(name) {
   if (!release_date) {
     release_date = 'N/A';
   }
- 
 
   getFetchedById(id).then(res => {
     let genres = res.genres.map(res => res.name);
@@ -90,8 +88,9 @@ export function renderModalInformation(name) {
     genres = genres.slice(0, 1);
 
     const render = ` 
-      <img src="${imgPreview}${poster_path}" alt="123" width="240" height="357">
-                <h2 class="mobal__title">${original_title}</h2>
+   
+     <div class="modal-box-img"><img  src="${imgPreview}${poster_path}" alt="123" class="modal-img" ></div>
+      <div class="modal-info"> <h2 class="mobal__title">${original_title}</h2>
                 <div class="helper-in-modal">
                     <ul class="mobal__list--description">
                         <li class="mobal-list__item">
@@ -126,8 +125,7 @@ export function renderModalInformation(name) {
                 </div>
                 <p class="mobal__title--about">About</p>
                 <p class="mobal__title--about-text">${overview}</p>
-                ${zxc(id)}
-                `;
+                ${zxc(id)}</div>`;
 
     return modalBox.insertAdjacentHTML('beforeend', render);
   });
@@ -135,7 +133,7 @@ export function renderModalInformation(name) {
 
 function zxc(id) {
   const btnName = id.toString();
-  
+
   let watchBtn = '';
   let queueBtn = '';
   const getItemWatched = localStorage.getItem('data-watched');
@@ -152,7 +150,7 @@ function zxc(id) {
   if (parseItemQueue.includes(btnName)) {
     queueBtn = 'remove from queue';
   } else {
-      queueBtn = 'add to queue';
+    queueBtn = 'add to queue';
   }
 
   return `<ul class="modal-btn__list">

@@ -7,8 +7,7 @@ const firstEl = document.querySelector('button[data-action="first"]');
 
 paginBlock.addEventListener('click', onClick);
 let num = 1;
-let pages = 1;
-// pages += Number(endOfPages.textContent);
+
 function onClick(e) {
   const queryName = e.target.nodeName;
   const dataName = e.target.dataset.action;
@@ -29,7 +28,7 @@ function onClick(e) {
   }
 
   if (dataName === 'first-trigger') {
-    firstTrigger();
+    firstTrigger(dataName);
   }
 
   if (dataName === 'sec-trigger') {
@@ -50,10 +49,10 @@ function onClick(e) {
   if (dataName === 'right-arrow') {
     rightArrow();
   }
-  if (num === pages) {
-    endOfPage();
+  if (dataName === 'right-dots') {
+    rightDotsFun();
   }
-  console.log('pages =', pages);
+
   console.log('num =', num);
 }
 
@@ -72,18 +71,14 @@ function first() {
   let resetPag = 2;
   firstEl.classList.add('is-active');
   leftDots.classList.remove('is-active');
+  endOfPages.classList.remove('is-active');
   leftDots.textContent = '2';
+  rightDots.textContent = '...';
   paginBtn.forEach(element => {
     let numToString = (resetPag += 1).toString();
     element.textContent = numToString;
 
-    if (
-      element.dataset.action === 'first-trigger' ||
-      element.dataset.action === 'sec-trigger' ||
-      element.dataset.action === 'third-trigger'
-    ) {
-      element.classList.remove('is-active');
-    }
+    element.classList.remove('is-active');
   });
 }
 function leftDotsFun() {
@@ -95,68 +90,31 @@ function leftDotsFun() {
   firstEl.classList.remove('is-active');
   leftDots.classList.add('is-active');
   paginBtn.forEach(element => {
-    if (
-      element.dataset.action === 'first-trigger' ||
-      element.dataset.action === 'sec-trigger' ||
-      element.dataset.action === 'third-trigger'
-    ) {
-      element.classList.remove('is-active');
-    }
+    element.classList.remove('is-active');
   });
 }
-function firstTrigger() {
+function firstTrigger(dataName) {
   firstEl.classList.remove('is-active');
   leftDots.classList.remove('is-active');
+  endOfPages.classList.remove('is-active');
   paginBtn.forEach(element => {
-    if (
-      element.dataset.action === 'sec-trigger' ||
-      element.dataset.action === 'third-trigger'
-    ) {
-      element.classList.remove('is-active');
-    }
-    if (element.dataset.action === 'first-trigger') {
+    element.classList.remove('is-active');
+
+    if (element.dataset.action === dataName) {
       num = Number(element.textContent);
       element.classList.add('is-active');
     }
   });
 
   if (num === 6) {
-    console.log(123);
-    paginBtn.forEach(element => {
-      if (element.dataset.action === 'third-trigger') {
-        element.classList.add('is-active');
-      }
-      if (element.dataset.action !== 'third-trigger') {
-        element.classList.remove('is-active');
-      }
-      let textToNumb = Number(element.textContent);
-      element.textContent = textToNumb -= 2;
-    });
+    activeRightSite('third-trigger');
   }
   if (num === 5) {
-    paginBtn.forEach(element => {
-      if (element.dataset.action === 'third-trigger') {
-        element.classList.add('is-active');
-      }
-      if (element.dataset.action !== 'third-trigger') {
-        element.classList.remove('is-active');
-      }
-      let textToNumb = Number(element.textContent);
-      element.textContent = textToNumb -= 2;
-    });
+    activeRightSite('third-trigger');
     leftDots.textContent = '2';
   }
   if (num === 4) {
-    paginBtn.forEach(element => {
-      if (element.dataset.action === 'sec-trigger') {
-        element.classList.add('is-active');
-      }
-      if (element.dataset.action !== 'sec-trigger') {
-        element.classList.remove('is-active');
-      }
-      let textToNumb = Number(element.textContent);
-      element.textContent = textToNumb -= 1;
-    });
+    activeRightSite('sec-trigger');
     leftDots.textContent = '2';
   }
 }
@@ -164,12 +122,8 @@ function secTrigger() {
   firstEl.classList.remove('is-active');
   leftDots.classList.remove('is-active');
   paginBtn.forEach(element => {
-    if (
-      element.dataset.action === 'first-trigger' ||
-      element.dataset.action === 'third-trigger'
-    ) {
-      element.classList.remove('is-active');
-    }
+    element.classList.remove('is-active');
+
     if (element.dataset.action === 'sec-trigger') {
       num = Number(element.textContent);
       element.classList.add('is-active');
@@ -177,42 +131,19 @@ function secTrigger() {
   });
 
   if (num === 5) {
-    console.log(123);
-    paginBtn.forEach(element => {
-      if (element.dataset.action === 'third-trigger') {
-        element.classList.add('is-active');
-      }
-      if (element.dataset.action !== 'third-trigger') {
-        element.classList.remove('is-active');
-      }
-      let textToNumb = Number(element.textContent);
-      element.textContent = textToNumb -= 1;
-    });
+    activeRightSite('third-trigger');
     leftDots.textContent = '2';
   }
   if (num === 6) {
-    paginBtn.forEach(element => {
-      if (element.dataset.action === 'third-trigger') {
-        element.classList.add('is-active');
-      }
-      if (element.dataset.action !== 'third-trigger') {
-        element.classList.remove('is-active');
-      }
-      let textToNumb = Number(element.textContent);
-      element.textContent = textToNumb -= 1;
-    });
+    activeRightSite('third-trigger');
   }
 }
 function thirdTrigger() {
   firstEl.classList.remove('is-active');
   leftDots.classList.remove('is-active');
   paginBtn.forEach(element => {
-    if (
-      element.dataset.action === 'first-trigger' ||
-      element.dataset.action === 'sec-trigger'
-    ) {
-      element.classList.remove('is-active');
-    }
+    element.classList.remove('is-active');
+
     if (element.dataset.action === 'third-trigger') {
       num = Number(element.textContent);
       element.classList.add('is-active');
@@ -224,12 +155,8 @@ function majorTrigger() {
   leftDots.classList.remove('is-active');
   firstEl.classList.remove('is-active');
   paginBtn.forEach(element => {
-    if (
-      element.dataset.action === 'first-trigger' ||
-      element.dataset.action === 'sec-trigger'
-    ) {
-      element.classList.remove('is-active');
-    }
+    element.classList.remove('is-active');
+
     if (element.dataset.action === 'third-trigger') {
       element.classList.add('is-active');
     }
@@ -244,15 +171,12 @@ function fourthTrigger() {
   leftDots.textContent = '...';
   leftDots.classList.remove('is-active');
   firstEl.classList.remove('is-active');
+  endOfPages.classList.remove('is-active');
   num = Number(leftDots.textContent);
 
   paginBtn.forEach(element => {
-    if (
-      element.dataset.action === 'first-trigger' ||
-      element.dataset.action === 'sec-trigger'
-    ) {
-      element.classList.remove('is-active');
-    }
+    element.classList.remove('is-active');
+
     if (element.dataset.action === 'third-trigger') {
       element.classList.add('is-active');
     }
@@ -263,36 +187,46 @@ function fourthTrigger() {
     element.textContent = textToNumb += 2;
   });
 }
-function rightDotsFun() {}
-function endOfPage() {
-  // paginBtn.forEach(element => {
-  //   let textToNumb = Number(element.textContent);
-  //   element.textContent = textToNumb -= 1;
-  // });
-  // let textToNumb = Number(endOfPages.textContent);
-  // rightDots.textContent = textToNumb -= 1;
+function rightDotsFun() {
+  console.log(endOfPages.textContent);
+  num = Number(endOfPages.textContent);
+
+  let resetPag = Number(endOfPages.textContent) - 7;
+
+  endOfPages.classList.add('is-active');
+  leftDots.classList.remove('is-active');
+  firstEl.classList.remove('is-active');
+  leftDots.textContent = '...';
+
+  rightDots.textContent = endOfPages.textContent - 1;
+  paginBtn.forEach(element => {
+    let numToString = (resetPag += 1);
+    element.textContent = numToString;
+
+    element.classList.remove('is-active');
+  });
 }
+function endOfPage() {}
 function rightArrow() {
-  if (pages === 1) {
+  if (num === 1) {
     num += 1;
-    pages = Number(leftDots.textContent);
+
     leftDots.classList.add('is-active');
     firstEl.classList.remove('is-active');
     return;
   }
 
-  if (pages === 2) {
+  if (num === 2) {
     num += 1;
     leftDots.classList.remove('is-active');
     paginBtn.forEach(element => {
       if (element.dataset.action === 'first-trigger') {
         element.classList.add('is-active');
-        pages = Number(element.textContent);
       }
     });
     return;
   }
-  if (pages === 3) {
+  if (num === 3) {
     num += 1;
     paginBtn.forEach(element => {
       if (element.dataset.action === 'first-trigger') {
@@ -300,12 +234,11 @@ function rightArrow() {
       }
       if (element.dataset.action === 'sec-trigger') {
         element.classList.add('is-active');
-        pages = Number(element.textContent);
       }
     });
     return;
   }
-  if (pages === 4) {
+  if (num === 4) {
     num += 1;
     paginBtn.forEach(element => {
       if (element.dataset.action === 'sec-trigger') {
@@ -313,12 +246,12 @@ function rightArrow() {
       }
       if (element.dataset.action === 'third-trigger') {
         element.classList.add('is-active');
-        pages = Number(element.textContent);
       }
     });
     return;
   }
-  if (pages >= 5) {
+
+  if (num >= 5 && num <= Number(endOfPages.textContent) - 5) {
     leftDots.textContent = '...';
     paginBtn.forEach(element => {
       if (element.dataset.action === 'third-trigger') {
@@ -326,24 +259,59 @@ function rightArrow() {
       }
       if (element.dataset.action === 'major-trigger') {
         num = Number(element.textContent);
-        pages = Number(element.textContent);
       }
+
       let textToNumb = Number(element.textContent);
       element.textContent = textToNumb += 1;
     });
+    console.log(num);
+  }
+  let cheakTrue = Number(endOfPages.textContent) >= num;
+  if (cheakTrue && num <= Number(endOfPages.textContent - 1)) {
+    num += 1;
+    console.log(123);
+    rightDots.textContent = endOfPages.textContent - 1;
+    if (num === Number(endOfPages.textContent) - 3) {
+      paginBtn.forEach(element => {
+        element.classList.remove('is-active');
+        if (element.dataset.action === 'major-trigger') {
+          element.classList.add('is-active');
+        }
+      });
+    }
+    if (num === Number(endOfPages.textContent) - 2) {
+      paginBtn.forEach(element => {
+        element.classList.remove('is-active');
+        if (element.dataset.action === 'fourth-trigger') {
+          element.classList.add('is-active');
+        }
+      });
+    }
+    if (num === Number(endOfPages.textContent) - 1) {
+      paginBtn.forEach(element => {
+        element.classList.remove('is-active');
+      });
+      rightDots.classList.add('is-active');
+    }
+    if (num === Number(endOfPages.textContent)) {
+      rightDots.classList.remove('is-active');
+
+      endOfPages.classList.add('is-active');
+    }
+
     return;
   }
+}
 
-  // if (num === 3) {
-  //   leftDots.classList.add('is-active');
-  //   firstEl.classList.remove('is-active');
-  // }
-  // if (num === 4) {
-  //   leftDots.classList.add('is-active');
-  //   firstEl.classList.remove('is-active');
-  // }
-  // if (num === 1) {
-  //   leftDots.classList.add('is-active');
-  //   firstEl.classList.remove('is-active');
-  // }
+function activeRightSite(dataName) {
+  paginBtn.forEach(element => {
+    if (element.dataset.action === dataName) {
+      element.classList.add('is-active');
+    }
+    if (element.dataset.action !== dataName) {
+      element.classList.remove('is-active');
+    }
+    let textToNumb = Number(element.textContent);
+    element.textContent = textToNumb -= 2;
+  });
 }
